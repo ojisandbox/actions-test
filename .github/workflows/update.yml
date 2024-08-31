@@ -39,15 +39,13 @@ jobs:
           # required
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
-          repositories: 'ojisandbox/actions-test-raw'
+          repositories: 'actions-test-raw'
       - name: Fetch1
         uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
           repository: 'ojisandbox/actions-test-raw'
           path: raw
-        env:
-          token: ${{ steps.app-token.outputs.token }}
       - run: |
           git config --global user.email "65916846+actions-user@users.noreply.github.com"
           git config --global user.name "actions-user"
