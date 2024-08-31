@@ -35,10 +35,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: Get GitHub API token
         id: generate_token
-        uses: tibdex/github-app-token@v1
+        uses: actions/create-github-app-token@v1
         with:
-          app_id: ${{ secrets.MY_GITHUB_APP_ID }}
-          private_key: ${{ secrets.MY_GITHUB_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
       - name: Fetch1
         uses: actions/checkout@v4
         with:
