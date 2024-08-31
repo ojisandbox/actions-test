@@ -19,9 +19,21 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Fetch0
+        uses: actions/checkout@v4
+        with:
+          path: tmp
+      - run:
+          git config --global user.email "65916846+actions-user@users.noreply.github.com"
+          git config --global user.name "actions-user"
+          date > tmp/date.txt
+          cd tmp
+          git add .
+          git commit -m "update"
+          git push
 
       # Runs a single command using the runners shell
-      - name: Fetch
+      - name: Fetch1
         uses: actions/checkout@v4
         with:
           repository: 'ojisandbox/actions-test-raw'
