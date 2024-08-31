@@ -28,7 +28,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: raw
       - run: |
-          git config --global user.email "action@github.com"
+          git config --global user.email "65916846+actions-user@users.noreply.github.com"
           git config --global user.name "actions-user"
           curl -o raw/known_exploited_vulnerabilities.json https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
           cd raw
