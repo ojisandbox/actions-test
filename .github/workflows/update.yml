@@ -33,21 +33,22 @@ jobs:
           git push
 
       # Runs a single command using the runners shell
-      - name: Get GitHub API token
-        id: generate_token
-        uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@v1
+        id: app-token
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.PRIVATE_KEY }}
+          # required
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
       - name: Fetch1
         uses: actions/checkout@v4
         with:
+          token: ${{ steps.app-token.outputs.token }}
           repository: 'ojisandbox/actions-test-raw'
           path: raw
       - run: |
           git config --global user.email "65916846+actions-user@users.noreply.github.com"
           git config --global user.name "actions-user"
-          git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/org-name/".insteadOf git@github.com:org-name/
+          # git config --global url."https://x-access-token:${{ steps.generate_token.outputs.token }}@github.com/org-name/".insteadOf git@github.com:org-name/
           curl -o raw/known_exploited_vulnerabilities.json https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
           cd raw
           git add .
