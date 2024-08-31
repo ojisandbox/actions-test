@@ -41,6 +41,7 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY }}
           repositories: 'actions-test-raw'
       - name: Fetch1
+        id: fetch1
         uses: actions/checkout@v4
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -53,5 +54,8 @@ jobs:
           curl -o raw/known_exploited_vulnerabilities.json https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
           cd raw
           git add .
+      - name: Update1
+        run: |
           git commit -m "update"
           git push
+        if: steps.fetch1.outputs.count > 0
